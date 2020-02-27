@@ -12,3 +12,15 @@ RUN apt-get install -y python-obspy python3-obspy  \
     && rm -rf /var/lib/apt/lists/*
 
 USER $NB_UID
+
+
+ADD .condarc $HOME/.condarc
+
+RUN conda install --quiet --yes \
+    'notebook_env' \
+    'nb_conda_kernels' \
+    && \
+    conda clean --all -f -y && \
+    fix-permissions $CONDA_DIR && \
+    fix-permissions /home/$NB_USER
+
