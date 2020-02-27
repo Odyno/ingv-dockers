@@ -1,7 +1,10 @@
 #!/bin/bash
 
+#TAG=$(git describe --exact-match --tags HEAD)
 IMAGE_NAME=odyno/ingv-base
-IMAGE_VER=$(git describe --exact-match --tags HEAD && echo OK || echo latest)
+IMAGE_VER=latest
+
+git describe --exact-match --tags HEAD 2 &>/dev/null
 
 docker info >/dev/null 2>&1
 if [ $? -ne 0 ]; then
